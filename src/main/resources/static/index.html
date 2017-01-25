@@ -28,13 +28,38 @@
 <script type="text/javascript">
     angular.module("app", []).controller("home", function($http) {
         var self = this;
+        var isAuthenticated = false;
+
         $http.get("/user").success(function(data) {
             self.user = data.userAuthentication.details.name;
             self.authenticated = true;
+            self.auth(data);
         }).error(function() {
             self.user = "N/A";
             self.authenticated = false;
+            isAuthenticated = false;
         });
+
+        self.auth = function(data) {
+
+
+            var dataObj = {
+                username : "joris",
+                password : "password",
+                authenticated: data.authenticated
+            };
+
+            $http({
+                url: '/auth',
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                data: JSON.stringify(dataObj)
+            });
+
+
+
+        };
+
         self.logout = function() {
             $http.post('/logout', {}).success(function() {
                 self.authenticated = false;

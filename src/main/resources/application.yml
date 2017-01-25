@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8080}
+  port: ${PORT:9900}
 
 security:
   oauth2:
@@ -14,6 +14,12 @@ security:
 
 jwt:
   header: Authorization
+  secret: 360t00l
+  expiration: 604800
+  route:
+    authentication:
+      path: auth
+      refresh: refresh
 
 ---
 eureka:
