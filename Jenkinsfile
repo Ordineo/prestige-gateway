@@ -1,3 +1,3 @@
 node('slave') {
-    sh("sudo docker version")
+    sh("echo 'this works'")
 }
