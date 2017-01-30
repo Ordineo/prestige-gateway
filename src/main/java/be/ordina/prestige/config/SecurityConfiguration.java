@@ -2,8 +2,10 @@ package be.ordina.prestige.config;
 
 import be.ordina.prestige.security.JwtAuthenticationEntryPoint;
 import be.ordina.prestige.security.JwtAuthenticationTokenFilter;
+import be.ordina.prestige.security.filter.AuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by JoLe on 23/01/2017.
@@ -30,6 +33,12 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+    @LoadBalanced
+    @Bean
+    RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -54,7 +63,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
                         "/webjars/**"
                 ).permitAll()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/auth/**", "/","/auth").permitAll()
                 .anyRequest().authenticated()
                 .and().logout().logoutSuccessUrl("/").permitAll();
         http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
@@ -69,12 +78,19 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public AuthFilter AuthFilter() throws Exception {
+        return new AuthFilter();
+    }
+
+
+    @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
 
         JwtAuthenticationTokenFilter authenticationTokenFilter = new JwtAuthenticationTokenFilter();
         authenticationTokenFilter.setAuthenticationManager(authenticationManagerBean());
         return authenticationTokenFilter;
     }
+
 
     @Autowired
     public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {

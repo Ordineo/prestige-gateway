@@ -34,7 +34,6 @@ public class AuthenticationController {
 
     @RequestMapping("/user")
     public Principal user(Principal principal) {
-        System.out.println("User endpoint is called");
         return principal;
     }
 

@@ -2,6 +2,7 @@ server:
   port: ${PORT:9900}
 
 security:
+  sessions: stateless
   oauth2:
     client:
       clientId: 8637e1875da03e60e45f
@@ -11,7 +12,6 @@ security:
       clientAuthenticationScheme: form
     resource:
       userInfoUri: https://api.github.com/user
-
 jwt:
   header: Authorization
   secret: 360t00l
@@ -20,20 +20,17 @@ jwt:
     authentication:
       path: auth
       refresh: refresh
-
----
+zuul:
+  # To remove "Authorization header", the explicit empty list has to be set (http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html)
+  sensitive-headers:
 eureka:
+  instance:
+    preferIpAddress: false
   client:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-  instance:
-    secure-port-enabled: true
-    secure-port: ${server.port}
-    non-secure-port-enabled: false
-ribbon:
-  IsSecure: true
 ---
 
 logging:
