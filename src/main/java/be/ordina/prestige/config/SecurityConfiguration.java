@@ -2,7 +2,6 @@ package be.ordina.prestige.config;
 
 import be.ordina.prestige.security.JwtAuthenticationEntryPoint;
 import be.ordina.prestige.security.JwtAuthenticationTokenFilter;
-import be.ordina.prestige.security.filter.AuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -76,12 +75,6 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
-    @Bean
-    public AuthFilter AuthFilter() throws Exception {
-        return new AuthFilter();
-    }
-
 
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
