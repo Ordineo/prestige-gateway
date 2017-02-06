@@ -1,4 +1,4 @@
-podTemplate(label: 'slave', containers: [containerTemplate(image: 'docker')]) {
+dockerTemplate {
   sh("echo this works")
   sh("docker version")
 }
