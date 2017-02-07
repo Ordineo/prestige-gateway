@@ -1,4 +1,4 @@
 node('slave') {
-        sh('echo this works')
-        sh('docker version')
+    echo this works
+    docker version
 }
