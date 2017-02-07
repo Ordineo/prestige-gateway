@@ -1,10 +1,4 @@
-#!/usr/bin/groovy
-def call() {
-podTemplate(label: label,
-        containers: [containerTemplate(name: 'docker', image: 'docker', command: 'cat', ttyEnabled: true)],
-        volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]) {
-    ssh """
-      echo this works
-      docker version
-    """
+node('slave') {
+        sh('echo this works')
+        sh('docker version')
 }
