@@ -1,4 +1,4 @@
 spring:
   cloud:
     config:
-      uri: http://config:42061/
+      uri: http://prestige.westeurope.cloudapp.azure.com:42061/
