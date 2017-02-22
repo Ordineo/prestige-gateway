@@ -56,6 +56,8 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
                         "/index.html",
                         "/home.html",
                         "/",
+                        //TODO remove after testing
+                        "/console**",
                         "/info**",
                         "/health**",
                         "/login**",
@@ -67,6 +69,11 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutSuccessUrl("/").permitAll();
         http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         http.headers().cacheControl();
+
+        // TODO: Should only be used in dev
+        // TODO: Necessary to view H2 console in front end
+        http.headers().frameOptions().disable();
+        http.headers().frameOptions().sameOrigin();
 
     }
 

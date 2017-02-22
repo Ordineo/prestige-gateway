@@ -1,22 +1,23 @@
-INSERT INTO USER (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, LASTPASSWORDRESETDATE) VALUES (2, 'Nivek', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'user', 'user', 1, PARSEDATETIME('01-JAN-2016','dd-MMM-yyyy'));
-INSERT INTO USER (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, LASTPASSWORDRESETDATE) VALUES (3, 'RyDg', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, PARSEDATETIME('01-JAN-2016','dd-MMM-yyyy'));
-INSERT INTO USER (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, LASTPASSWORDRESETDATE) VALUES (4, 'PhDa', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, PARSEDATETIME('01-JAN-2016','dd-MMM-yyyy'));
-INSERT INTO USER (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, LASTPASSWORDRESETDATE) VALUES (5, 'Test', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, PARSEDATETIME('01-JAN-2016','dd-MMM-yyyy'));
-INSERT INTO USER (ID, USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, LASTPASSWORDRESETDATE) VALUES (6, 'joris', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, PARSEDATETIME('01-JAN-2016','dd-MMM-yyyy'));
+INSERT INTO userinfo (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, last_password_reset_date) VALUES ('Nivek', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'user', 'user', 1, GETDATE ());
+INSERT INTO userinfo (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, last_password_reset_date) VALUES ('RyDg', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, GETDATE ());
+INSERT INTO userinfo (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, last_password_reset_date) VALUES ('PhDa', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, GETDATE ());
+INSERT INTO userinfo (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, last_password_reset_date) VALUES ('Test', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, GETDATE ());
+INSERT INTO userinfo (USERNAME, PASSWORD, FIRSTNAME, LASTNAME, ENABLED, last_password_reset_date) VALUES ('Joris', '$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC', 'admin', 'admin', 1, GETDATE ());
 
-INSERT INTO AUTHORITY (ID, NAME) VALUES (1, 'ROLE_USER');
-INSERT INTO AUTHORITY (ID, NAME) VALUES (2, 'ROLE_ADMIN');
+INSERT INTO authority (NAME) VALUES ('ROLE_USER');
+INSERT INTO authority (NAME) VALUES ('ROLE_ADMIN');
 
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (2, 1);
 
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (3, 1);
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (3, 2);
-
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (4, 1);
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (4, 2);
-
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (5, 1);
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (5, 2);
-
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (6, 1);
-INSERT INTO USER_AUTHORITY (USER_ID, AUTHORITY_ID) VALUES (6, 2);
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Nivek'), (SELECT id FROM authority where name='ROLE_USER'));
+--RyDg
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='RyDg'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='RyDg'), (SELECT id FROM authority where name='ROLE_ADMIN'));
+--PhDa
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='PhDa'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='PhDa'), (SELECT id FROM authority where name='ROLE_ADMIN'));
+--Test
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Test'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Test'), (SELECT id FROM authority where name='ROLE_ADMIN'));
+--Joris
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Joris'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Joris'), (SELECT id FROM authority where name='ROLE_ADMIN'));
