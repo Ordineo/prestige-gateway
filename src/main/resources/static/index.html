@@ -16,6 +16,7 @@
 <div class="container" ng-show="!home.authenticated">
     Login with: <a href="/login">Github</a>
 </div>
+<p></p>
 <div class="container" ng-show="home.authenticated">
     Logged in as: <span ng-bind="home.user"></span>
     <div>
@@ -55,9 +56,22 @@
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 data: JSON.stringify(dataObj)
-            });
-
-
+            }).then(
+                function(response) {
+                    console.log(response);
+                    var p = $('p')
+                        .attr('id', 'token')
+                        .css({
+                            'width': '500px',
+                            'margin': '10px'
+                        })
+                        .html(response.data.token);
+                    $('body').append(p);
+                },
+                function(error) {
+                    console.log(response);
+                }
+            );
 
         };
 
