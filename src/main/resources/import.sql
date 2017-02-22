@@ -8,16 +8,16 @@ INSERT INTO authority (NAME) VALUES ('ROLE_USER');
 INSERT INTO authority (NAME) VALUES ('ROLE_ADMIN');
 
 
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Nivek'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Nivek'), (SELECT id FROM authority where name='ROLE_USER'));
 --RyDg
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='RyDg'), (SELECT id FROM authority where name='ROLE_USER'));
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='RyDg'), (SELECT id FROM authority where name='ROLE_ADMIN'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='RyDg'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='RyDg'), (SELECT id FROM authority where name='ROLE_ADMIN'));
 --PhDa
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='PhDa'), (SELECT id FROM authority where name='ROLE_USER'));
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='PhDa'), (SELECT id FROM authority where name='ROLE_ADMIN'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='PhDa'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='PhDa'), (SELECT id FROM authority where name='ROLE_ADMIN'));
 --Test
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Test'), (SELECT id FROM authority where name='ROLE_USER'));
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Test'), (SELECT id FROM authority where name='ROLE_ADMIN'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Test'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Test'), (SELECT id FROM authority where name='ROLE_ADMIN'));
 --Joris
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Joris'), (SELECT id FROM authority where name='ROLE_USER'));
-INSERT INTO client_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Joris'), (SELECT id FROM authority where name='ROLE_ADMIN'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Joris'), (SELECT id FROM authority where name='ROLE_USER'));
+INSERT INTO userinfo_authority (userinfo_id, AUTHORITY_ID) VALUES ((SELECT id FROM userinfo where username='Joris'), (SELECT id FROM authority where name='ROLE_ADMIN'));

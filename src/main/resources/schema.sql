@@ -1,3 +1,5 @@
+
+DROP TABLE IF EXISTS userinfo;
 CREATE TABLE userinfo (
     id INT IDENTITY(1,1) PRIMARY KEY
   , username VARCHAR(60) NOT NULL
@@ -8,11 +10,13 @@ CREATE TABLE userinfo (
   , last_password_reset_date DATE
 );
 
+DROP TABLE IF EXISTS authority;
 CREATE TABLE authority (
     id INT IDENTITY(1,1) PRIMARY KEY
   , name VARCHAR(60) NOT NULL
 );
 
+DROP TABLE IF EXISTS userinfo_authority;
 CREATE TABLE userinfo_authority (
     id INT IDENTITY(1,1) PRIMARY KEY
   , userinfo_id INT NOT NULL

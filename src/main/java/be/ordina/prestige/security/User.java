@@ -37,7 +37,8 @@ public class User {
     @NotNull
     private Date lastPasswordResetDate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    //TODO should be lazy, but transaction problems? (could not initialize proxy - no Session)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "userinfo_authority",
             joinColumns = {@JoinColumn(name = "userinfo_id", referencedColumnName = "id")},
