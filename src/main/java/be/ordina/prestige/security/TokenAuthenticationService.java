@@ -2,7 +2,6 @@ package be.ordina.prestige.security;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
@@ -17,10 +16,8 @@ import static java.util.Collections.emptyList;
  */
 public class TokenAuthenticationService {
 
-    @Value("${jwt.expiration}")
-    static long expirationTime;
-    @Value("${jwt.secret}")
-    static String secret;
+    static final long EXPIRATION_TIME = 43200000;
+    static final String SECRET = "h4OxnqQKgtydZiRspW8R";
 
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
@@ -28,8 +25,8 @@ public class TokenAuthenticationService {
     static void addAuthentication(HttpServletResponse res, String username) {
         String JWT = Jwts.builder()
                 .setSubject(username)
-                .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
-                .signWith(SignatureAlgorithm.HS512, secret)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
     }
@@ -39,7 +36,7 @@ public class TokenAuthenticationService {
         if (token != null) {
             // parse the token.
             String user = Jwts.parser()
-                    .setSigningKey(secret)
+                    .setSigningKey(SECRET)
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
