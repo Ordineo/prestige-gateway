@@ -123,11 +123,11 @@
 			<artifactId>hibernate-java8</artifactId>
 		</dependency>
 
-		<!-- EMBEDDED DB -->
+		<!-- postgres -->
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4-1206-jdbc42</version>
 		</dependency>
 
 
