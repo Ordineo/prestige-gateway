@@ -29,6 +29,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         config.addAllowedHeader("*");
         config.addAllowedMethod(HttpMethod.POST);
         config.addAllowedMethod(HttpMethod.GET);
+        config.addAllowedMethod(HttpMethod.PUT);
+        config.addAllowedMethod(HttpMethod.DELETE);
         source.registerCorsConfiguration("/**", config);
         return source;
     }
