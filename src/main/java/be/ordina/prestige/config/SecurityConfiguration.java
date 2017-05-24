@@ -52,12 +52,6 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers(HttpMethod.POST, "/employees-service/register");
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
                 .cors().configurationSource(corsConfigurationSource)
@@ -65,6 +59,7 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
                 .csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, "/employees-service/login").permitAll()
+                .antMatchers("/employees-service/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // We filter the api/login requests
