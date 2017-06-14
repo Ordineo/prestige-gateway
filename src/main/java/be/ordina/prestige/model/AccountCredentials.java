@@ -1,11 +1,11 @@
 package be.ordina.prestige.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-/**
- * Created by SaFu on 27/04/2017.
- */
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(exclude = {"password"})
+@EqualsAndHashCode
 @Getter
 @Setter
 public class AccountCredentials {
