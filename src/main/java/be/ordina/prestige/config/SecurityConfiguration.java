@@ -2,6 +2,7 @@ package be.ordina.prestige.config;
 
 import be.ordina.prestige.security.JWTAuthenticationFilter;
 import be.ordina.prestige.security.JWTLoginFilter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,10 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 @EnableWebSecurity
 @Configuration
+@Slf4j
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -73,9 +76,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
     @Autowired
+    @PostConstruct
     public void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+        log.info("Query User: {}", usersQuery);
+        log.info("Query Role: {}", rolesQuery);
         auth.jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)
                 .authoritiesByUsernameQuery(rolesQuery)

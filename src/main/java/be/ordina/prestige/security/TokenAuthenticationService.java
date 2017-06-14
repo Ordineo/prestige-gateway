@@ -34,7 +34,7 @@ class TokenAuthenticationService {
 
     static Authentication getAuthentication(HttpServletRequest request) {
         log.info("Get authentication");
-        
+
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
