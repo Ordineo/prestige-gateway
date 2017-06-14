@@ -77,7 +77,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    @PostConstruct
     public void configureAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         log.info("Query User: {}", usersQuery);
         log.info("Query Role: {}", rolesQuery);
